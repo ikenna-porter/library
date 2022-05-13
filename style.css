@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+}
+
+#container {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+} 
+
+#input-sidebar {
+    display: flex;
+    flex-basis: 25%;
+}
+
+#input-sidebar form {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    background-color:rgb(192, 245, 227);
+    justify-content: center;
+    align-items: center;
+
+}
+
+#book-list {
+    flex-basis: 75%;
+    background-color: rgb(244, 227, 227);
+}
+
+form input { width: 70%; }
+
+form > button {
+    border-radius: 5px;
+}
+
+form input:nth-child(-n+3) {
+    margin: 30px;
+}
