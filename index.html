@@ -12,22 +12,40 @@
     <div id="container">
         <div id="input-sidebar">
             <form action="">
-                <input type="text" placeholder="Book Title" name="title">
+                <input type="text" placeholder="Book Title" name="title" id="title" required>
 
-                <input type="text" placeholder="Author" name="author">
+                <input type="text" placeholder="Author" name="author" id="author" required>
 
-                <input type="number" placeholder="Pages" name="pages" min="0">
+                <input type="number" placeholder="Pages" name="pages" id="pages" min="0" required>
 
                 <br> <label for="read">Have you read it?</label> <br>
                 <label for="radio-true">Yes</label>
-                <input type="radio" id="radio-true" name="read" value="true"><br>
+                <input type="radio" id="radio-true" name="read" value="true" required><br>
                 <label for="radio-false">No</label>
-                <input type="radio" id="radio-false" name="read" value="false"><br>
+                <input type="radio" id="radio-false" name="read" value="false"required><br>
                 <button type="submit">Submit</button>
             </form>
         </div>
-        <div id="book-list">
-
+        <div class="main-content">
+            <div class="book-table">
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Pages</th>
+                        <th>Read</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
