@@ -6,6 +6,7 @@ const readTrue = document.querySelector('#radio-true');
 const readFalse = document.querySelector('#radio-false');
 const submit = document.querySelector('form > button');
 const form = document.querySelector('form');
+const table = document.querySelector('table');
 
 //Create Library List
 const myLibrary = [];
@@ -19,16 +20,28 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-    //If all input boxes are filled in correctly,
-        //Event listener on submit button
-        form.addEventListener("submit", function(e) {
-            const book = new Book(title.value, author.value, pages.value, read.value);
-            myLibrary.push(book);
-        });
+//If all input boxes are filled in correctly,
+//Event listener on submit button
+form.addEventListener("submit", function(e) {
+    e.preventDefault(); //prevents the default behavior of this even - which is to reload webpage
+    const book = new Book(title.value, author.value, pages.value, read.value);
+    myLibrary.push(book);
+    addBook();
+});
+        
     
-    //If input boxes are empty
-        //Inform user which boxes must be filled
+//If input boxes are empty
+//Inform user which boxes must be filled
 
-//Push book object into myLibrary
+function addBook() {
+    const tr = document.createElement('tr');
+    const currentBook = myLibrary[myLibrary.length - 1];
 
-//forEach element in myLibrary, display in table with DOM
+    for (let info in currentBook) {
+        let td = document.createElement('td');
+        td.innerText = currentBook[info];
+        tr.appendChild(td);
+    }
+
+    table.appendChild(tr);
+}
