@@ -1,12 +1,15 @@
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
-const read = document.getElementsByName('read');
+let read = document.querySelectorAll('input[name="read"]');
 const readTrue = document.querySelector('#radio-true');
 const readFalse = document.querySelector('#radio-false');
 const submit = document.querySelector('form > button');
 const form = document.querySelector('form');
 const table = document.querySelector('table');
+const tbody = document.querySelector('tbody');
+
+
 
 //Create Library List
 const myLibrary = [];
@@ -24,9 +27,16 @@ function Book(title, author, pages, read) {
 //Event listener on submit button
 form.addEventListener("submit", function(e) {
     e.preventDefault(); //prevents the default behavior of this even - which is to reload webpage
-    const book = new Book(title.value, author.value, pages.value, read.value);
+    
+    for (let option of read) {
+        if (option) read = option.value;
+    }
+
+    const book = new Book(title.value, author.value, pages.value, read);
     myLibrary.push(book);
     addBook();
+
+    read = document.querySelectorAll('input[name="read"]');
 });
         
     
@@ -43,5 +53,19 @@ function addBook() {
         tr.appendChild(td);
     }
 
-    table.appendChild(tr);
+    //Appends the delete button
+    let td = document.createElement('td');
+    const del = document.createElement('input');
+    del.setAttribute('type', 'image');
+    del.setAttribute('src', 'img/trash-icon.png');
+    del.setAttribute('alt', 'trash icon');
+    del.style.maxWidth = '100%';
+    td.style.display = 'flex';
+    td.style.justifyContent = 'center';
+    td.style.maxWidth = '100%';
+    td.appendChild(del);
+    tr.appendChild(td);
+
+
+    tbody.appendChild(tr);
 }
