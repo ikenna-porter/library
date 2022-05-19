@@ -21,6 +21,11 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.remove = function () {
+        //deletes object instance from myLibrary array
+        const index = myLibrary.indexOf(this);
+        myLibrary.splice(index,1);
+    }
 }
 
 //If all input boxes are filled in correctly,
@@ -28,13 +33,14 @@ function Book(title, author, pages, read) {
 form.addEventListener("submit", function(e) {
     e.preventDefault(); //prevents the default behavior of this even - which is to reload webpage
     
+    //asigns value to the variable "read"
     for (let option of read) {
         if (option) read = option.value;
     }
 
     const book = new Book(title.value, author.value, pages.value, read);
     myLibrary.push(book);
-    addBook();
+    addBook(book);
 
     read = document.querySelectorAll('input[name="read"]');
 });
@@ -43,29 +49,62 @@ form.addEventListener("submit", function(e) {
 //If input boxes are empty
 //Inform user which boxes must be filled
 
-function addBook() {
+function addBook(book) {
     const tr = document.createElement('tr');
     const currentBook = myLibrary[myLibrary.length - 1];
+    const del = document.createElement('input');
 
     for (let info in currentBook) {
         let td = document.createElement('td');
-        td.innerText = currentBook[info];
+
+        if (info === "remove") {
+            del.setAttribute('type', 'image');
+            del.setAttribute('src', 'img/trash-icon.png');
+            del.setAttribute('alt', 'trash icon');
+            del.style.maxWidth = '100%';
+            td.style.display = 'flex';
+            td.style.justifyContent = 'center';
+            td.style.maxWidth = '100%';
+            td.classList.add('delButton');
+            td.appendChild(del);
+            tr.appendChild(td);
+
+
+            //adds event listener. When clicked, removed row
+            del.addEventListener('click', (e) => {
+                del.parentElement.remove();
+                
+                //deletes book from myLibrary
+                book.remove(); 
+            });
+
+        } else { 
+            td.innerText = currentBook[info]; 
+        }
+
         tr.appendChild(td);
     }
 
     //Appends the delete button
-    let td = document.createElement('td');
-    const del = document.createElement('input');
-    del.setAttribute('type', 'image');
-    del.setAttribute('src', 'img/trash-icon.png');
-    del.setAttribute('alt', 'trash icon');
-    del.style.maxWidth = '100%';
-    td.style.display = 'flex';
-    td.style.justifyContent = 'center';
-    td.style.maxWidth = '100%';
-    td.appendChild(del);
-    tr.appendChild(td);
+    // let td = document.createElement('td');
+    // const del = document.createElement('input');
+    // del.setAttribute('type', 'image');
+    // del.setAttribute('src', 'img/trash-icon.png');
+    // del.setAttribute('alt', 'trash icon');
+    // del.style.maxWidth = '100%';
+    // td.style.display = 'flex';
+    // td.style.justifyContent = 'center';
+    // td.style.maxWidth = '100%';
+    // td.appendChild(del);
+    // tr.appendChild(td);
 
 
     tbody.appendChild(tr);
+    // return del;
 }
+
+
+// //Deletes entire row if del is pressed
+// del.addEventListener("click",(e) => {
+
+// });

@@ -1,6 +1,12 @@
+@font-face {
+    font-family: "PTSans";
+    src: url(/font/PTSans-Regular.ttf);
+}
+
 body {
     margin: 0;
     background-color: #F1EEE9;
+    font-family: "PTSans";
 }
 
 #container {
@@ -83,11 +89,16 @@ thead {
 }
 
 td {
-    border: 1px solid black;
+    border-bottom: 1.25px dotted gray;
     width: 5vw;
     height: 3vh;
 }
 
 tr, th {
     height: 8vh;
+    font-size: 1.25em;
+}
+
+tbody > tr:nth-child(even) {
+    background-color: #b3b6b9;
 }
