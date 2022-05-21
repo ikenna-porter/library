@@ -8,7 +8,7 @@ const submit = document.querySelector('form > button');
 const form = document.querySelector('form');
 const table = document.querySelector('table');
 const tbody = document.querySelector('tbody');
-
+const libraryStats = document.querySelector('.library-stats');
 
 
 //Create Library List
@@ -74,12 +74,13 @@ function addBook(book) {
             for (let option of read) {
                 if (option.checked === true) read = option.id;
             }
+            
             //Determines which radio box is checked and selects the corresponding image of cross or check
             if (read === 'radio-true') {
                 const check = document.createElement('img');
                 check.setAttribute('src', 'img/check.png');
-                check.style.maxHeight = '50%';
-                check.style.maxWidth = '50%';
+                check.style.maxHeight = '90%';
+                check.style.maxWidth = '90%';
                 td.appendChild(check);
             } else if (read === 'radio-false') {
                 const cross = document.createElement('img');
@@ -88,6 +89,7 @@ function addBook(book) {
                 cross.style.maxWidth = '90%';
                 td.appendChild(cross);
             }
+
         } else { 
             td.innerText = currentBook[info]; 
         }
@@ -96,3 +98,10 @@ function addBook(book) {
     }
     tbody.appendChild(tr);
 }
+
+
+libraryStats.innerText = 
+    `Numer of Books = ${myLibrary.length}\n
+    Read Books = \n
+    Unread Books = `
+;

@@ -60,6 +60,12 @@ h1 {
     width: 100%;
 }
 
+.intro {
+    width: 80%;
+    font-size: 1.5em;
+    text-align: center;
+}
+
 .book-table {
     flex-basis: 50%;
     width: 75%;
@@ -81,6 +87,7 @@ form input:nth-child(-n+3) {
 table {
     border-collapse: collapse;
     width: 100%;
+    text-align: center;
 }
 
 thead {
