@@ -33,21 +33,13 @@ function Book(title, author, pages, read) {
 form.addEventListener("submit", function(e) {
     e.preventDefault(); //prevents the default behavior of this even - which is to reload webpage
     
-    //asigns value to the variable "read"
-    for (let option of read) {
-        if (option) read = option.value;
-    }
-
     const book = new Book(title.value, author.value, pages.value, read);
     myLibrary.push(book);
     addBook(book);
 
     read = document.querySelectorAll('input[name="read"]');
 });
-        
-    
-//If input boxes are empty
-//Inform user which boxes must be filled
+
 
 function addBook(book) {
     const tr = document.createElement('tr');
@@ -61,10 +53,9 @@ function addBook(book) {
             del.setAttribute('type', 'image');
             del.setAttribute('src', 'img/trash-icon.png');
             del.setAttribute('alt', 'trash icon');
-            del.style.maxWidth = '100%';
-            td.style.display = 'flex';
-            td.style.justifyContent = 'center';
+            del.style.maxWidth = '15%';
             td.style.maxWidth = '100%';
+            td.style.maxHeight = '100%';
             td.classList.add('delButton');
             td.appendChild(del);
             tr.appendChild(td);
@@ -72,39 +63,36 @@ function addBook(book) {
 
             //adds event listener. When clicked, removed row
             del.addEventListener('click', (e) => {
-                del.parentElement.remove();
+                td.parentElement.remove();
                 
                 //deletes book from myLibrary
                 book.remove(); 
             });
 
+        } else if (info === 'read') {
+            //asigns value to the variable "read"
+            for (let option of read) {
+                if (option.checked === true) read = option.id;
+            }
+            //Determines which radio box is checked and selects the corresponding image of cross or check
+            if (read === 'radio-true') {
+                const check = document.createElement('img');
+                check.setAttribute('src', 'img/check.png');
+                check.style.maxHeight = '50%';
+                check.style.maxWidth = '50%';
+                td.appendChild(check);
+            } else if (read === 'radio-false') {
+                const cross = document.createElement('img');
+                cross.setAttribute('src', 'img/cross.png');
+                cross.style.maxHeight = '90%';
+                cross.style.maxWidth = '90%';
+                td.appendChild(cross);
+            }
         } else { 
             td.innerText = currentBook[info]; 
         }
 
         tr.appendChild(td);
     }
-
-    //Appends the delete button
-    // let td = document.createElement('td');
-    // const del = document.createElement('input');
-    // del.setAttribute('type', 'image');
-    // del.setAttribute('src', 'img/trash-icon.png');
-    // del.setAttribute('alt', 'trash icon');
-    // del.style.maxWidth = '100%';
-    // td.style.display = 'flex';
-    // td.style.justifyContent = 'center';
-    // td.style.maxWidth = '100%';
-    // td.appendChild(del);
-    // tr.appendChild(td);
-
-
     tbody.appendChild(tr);
-    // return del;
 }
-
-
-// //Deletes entire row if del is pressed
-// del.addEventListener("click",(e) => {
-
-// });
