@@ -13,6 +13,8 @@ const libraryStats = document.querySelector('.library-stats');
 
 //Create Library List
 const myLibrary = [];
+let booksRead = 0;
+let booksUnread = 0;
 
 //Once user information is submitted, create new book object
     //Book object constructor function
@@ -38,6 +40,9 @@ form.addEventListener("submit", function(e) {
     addBook(book);
 
     read = document.querySelectorAll('input[name="read"]');
+
+    //Updates library stats each time form submitted
+    updateLibraryStats()
 });
 
 
@@ -58,15 +63,18 @@ function addBook(book) {
             td.style.maxHeight = '100%';
             td.classList.add('delButton');
             td.appendChild(del);
-            tr.appendChild(td);
 
-
-            //adds event listener. When clicked, removed row
+            //adds event listener. When clicked, removes row
             del.addEventListener('click', (e) => {
-                td.parentElement.remove();
-                
+                if (tr.className === 'check') booksRead--;
+                if (tr.className === 'cross') booksUnread--;
+
                 //deletes book from myLibrary
-                book.remove(); 
+                book.remove();
+
+                updateLibraryStats(); 
+
+                td.parentElement.remove();
             });
 
         } else if (info === 'read') {
@@ -82,16 +90,20 @@ function addBook(book) {
                 check.style.maxHeight = '90%';
                 check.style.maxWidth = '90%';
                 td.appendChild(check);
+                tr.classList.add('check');
+                booksRead++;
             } else if (read === 'radio-false') {
                 const cross = document.createElement('img');
                 cross.setAttribute('src', 'img/cross.png');
                 cross.style.maxHeight = '90%';
                 cross.style.maxWidth = '90%';
                 td.appendChild(cross);
+                tr.classList.add('cross');
+                booksUnread++;
             }
 
         } else { 
-            td.innerText = currentBook[info]; 
+            td.innerText = currentBook[info];
         }
 
         tr.appendChild(td);
@@ -99,9 +111,10 @@ function addBook(book) {
     tbody.appendChild(tr);
 }
 
+function updateLibraryStats() {
+    libraryStats.innerText = 
+        `Numer of Books = ${myLibrary.length}  /   Read Books = ${booksRead}  /  Unread Books = ${booksUnread}`;
+    libraryStats.classList.add('libraryStats');
+}
 
-libraryStats.innerText = 
-    `Numer of Books = ${myLibrary.length}\n
-    Read Books = \n
-    Unread Books = `
-;
+updateLibraryStats()

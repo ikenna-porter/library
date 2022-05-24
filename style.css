@@ -19,18 +19,27 @@ body {
     display: flex;
     flex-direction: column;
     flex-basis: 25%;
-    background-color:#EC994B;
+    background-color:#b3b6b9;
 }
 
 .logo-container {
-    
+    display: flex;
+    padding: 10px;
+}
+
+.logo-container > img {
+    flex: .75;
+    width: 100%;
+    height: 80%;
 }
 
 h1 {
+    flex: 1;
     display: inline-block;
-    font-size: 2em;
+    font-size: 3em;
     color: white;
     margin: 0;
+    padding-bottom: 5px;
 }
 
 #input-sidebar > div > div {
@@ -41,7 +50,7 @@ h1 {
 
 #input-sidebar > div > div > img {
     width: 100%;
-    height: 100%;
+    height: 80%;
 }
 
 #input-sidebar form {
@@ -52,18 +61,16 @@ h1 {
     align-items: center;
 }
 
+label[for=read] {
+    font-size: 1.25em;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-}
-
-.intro {
-    width: 80%;
-    font-size: 1.5em;
-    text-align: center;
 }
 
 .book-table {
@@ -84,6 +91,11 @@ form input:nth-child(-n+3) {
     margin: 30px;
 }
 
+.libraryStats {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -91,7 +103,7 @@ table {
 }
 
 thead {
-    background-color: #15133C;
+    background-color: black;
     color: white;
 }
 
